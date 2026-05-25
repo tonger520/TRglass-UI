@@ -1,0 +1,137 @@
+/* ============================================
+   TRglass v1 - 导航栏组件
+   ============================================ */
+
+.glass-navbar {
+    background: var(--bg-glass);
+    backdrop-filter: blur(var(--blur-heavy));
+    -webkit-backdrop-filter: blur(var(--blur-heavy));
+    border-bottom: 1px solid var(--border-glass);
+    padding: 0 var(--space-lg);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-navbar.scrolled {
+    background: var(--bg-glass-solid);
+    box-shadow: var(--shadow-glass);
+}
+
+/* 品牌/Logo */
+.navbar-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.navbar-brand .logo-icon {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--info) 100%);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+}
+
+/* 导航链接 */
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.nav-link {
+    padding: var(--space-sm) var(--space-md);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transform: translateX(-50%);
+    transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 1px;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: var(--primary-light);
+}
+.nav-link:hover::after {
+    width: 60%;
+}
+.nav-link.active {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+.nav-link.active::after {
+    width: 80%;
+}
+
+/* 右侧操作区 */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+/* 汉堡菜单（移动端） */
+.navbar-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: var(--space-sm);
+    border-radius: var(--radius-sm);
+}
+.navbar-toggle:hover {
+    background: var(--primary-light);
+}
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .glass-navbar { padding: 0 var(--space-md); }
+    .navbar-toggle { display: flex; }
+    .navbar-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--bg-glass-solid);
+        backdrop-filter: blur(var(--blur-heavy));
+        -webkit-backdrop-filter: blur(var(--blur-heavy));
+        border-bottom: 1px solid var(--border-glass);
+        flex-direction: column;
+        padding: var(--space-md);
+        gap: var(--space-xs);
+        box-shadow: var(--shadow-glass);
+    }
+    .navbar-links.show { display: flex; }
+    .nav-link { width: 100%; padding: var(--space-md); }
+}
