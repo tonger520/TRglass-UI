@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TRglass v1{% endblock %}</title>
+
+    <!-- 基础样式 -->
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+
+    <!-- 组件样式（按需引入） -->
+    <link rel="stylesheet" href="/static/css/components/navbar.css">
+    <link rel="stylesheet" href="/static/css/components/card.css">
+    <link rel="stylesheet" href="/static/css/components/button.css">
+    <link rel="stylesheet" href="/static/css/components/form.css">
+    <link rel="stylesheet" href="/static/css/components/modal.css">
+    <link rel="stylesheet" href="/static/css/components/table.css">
+    <link rel="stylesheet" href="/static/css/components/badge.css">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% block body %}
+    <!-- 导航栏 -->
+    <nav class="glass-navbar">
+        <div class="navbar-brand">
+            <div class="logo-icon">TR</div>
+            <span>TRglass v1</span>
+        </div>
+        <button class="navbar-toggle" aria-label="菜单">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="3" y1="6" x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+        <div class="navbar-links">
+            <a href="/" class="nav-link active">首页</a>
+            <a href="/components" class="nav-link">组件</a>
+            <a href="/docs" class="nav-link">文档</a>
+        </div>
+        <div class="navbar-actions">
+            <button class="btn btn-ghost btn-sm" onclick="UI.theme.toggle()">切换主题</button>
+        </div>
+    </nav>
+
+    <!-- 主内容 -->
+    <main class="page-body">
+        <div class="container">
+            {% block content %}{% endblock %}
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="page-footer">
+        <div class="container text-center text-muted">
+            <p>TRglass v1 &copy; 2024 by 童儿制作</p>
+            <p style="font-size: 0.75rem; margin-top: var(--space-xs);">仅供学习参考 · 请尊重每个人的知识产权</p>
+        </div>
+    </footer>
+    {% endblock %}
+
+    <!-- 交互脚本 -->
+    <script src="/static/js/ui.js" defer></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
