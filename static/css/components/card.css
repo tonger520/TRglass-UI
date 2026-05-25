@@ -1,0 +1,172 @@
+/* ============================================
+   TRglass v1 - 卡片组件
+   ============================================ */
+
+.glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+    transition:
+        background 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 玻璃反光效果 */
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60%;
+    background: linear-gradient(180deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+
+.glass-card:hover {
+    background: var(--bg-glass-hover);
+    box-shadow: var(--shadow-glass-lg);
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.glass-card:hover::before {
+    opacity: 1;
+}
+
+/* 卡片头部 */
+.card-header {
+    padding: var(--space-lg);
+    border-bottom: 1px solid var(--border-glass);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.card-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+}
+
+/* 卡片内容 */
+.card-body {
+    padding: var(--space-lg);
+    position: relative;
+    z-index: 1;
+}
+
+/* 卡片底部 */
+.card-footer {
+    padding: var(--space-md) var(--space-lg);
+    border-top: 1px solid var(--border-glass);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-sm);
+    position: relative;
+    z-index: 1;
+}
+
+/* 卡片变体 */
+.card-flat {
+    box-shadow: none;
+    border: 1px solid var(--border-glass);
+}
+.card-flat:hover {
+    box-shadow: var(--shadow-glass);
+}
+
+/* 统计卡片 */
+.stat-card {
+    padding: var(--space-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.stat-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--info));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.stat-card:hover::after {
+    transform: scaleX(1);
+}
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+    transition: all 0.3s ease;
+}
+.stat-card:hover .stat-value {
+    transform: scale(1.05);
+}
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: var(--space-xs);
+    transition: color 0.3s ease;
+}
+.stat-card:hover .stat-label {
+    color: var(--text-primary);
+}
+.stat-change {
+    font-size: 0.8rem;
+    margin-top: var(--space-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    transition: transform 0.3s ease;
+}
+.stat-card:hover .stat-change {
+    transform: translateY(-2px);
+}
+.stat-change.up { color: var(--success); }
+.stat-change.down { color: var(--danger); }
+
+/* 图片卡片 */
+.card-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+.card-image-overlay {
+    position: relative;
+}
+.card-image-overlay .card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: white;
+}
