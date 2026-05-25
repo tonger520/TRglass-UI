@@ -1,0 +1,114 @@
+/* ============================================
+   TRglass v1 - 表格组件
+   ============================================ */
+
+.table-container {
+    background: var(--bg-glass);
+    backdrop-filter: blur(var(--blur));
+    -webkit-backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.glass-table thead {
+    background: var(--bg-glass-hover);
+}
+
+.glass-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-glass);
+    white-space: nowrap;
+}
+
+.glass-table td {
+    padding: 12px 16px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-glass);
+    vertical-align: middle;
+}
+
+.glass-table tbody tr {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-table tbody tr:hover {
+    background: var(--primary-light);
+}
+.glass-table tbody tr:last-child td { border-bottom: none; }
+
+/* 条纹表格 */
+.table-striped tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.02);
+}
+[data-theme="dark"] .table-striped tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* 紧凑表格 */
+.table-compact th,
+.table-compact td { padding: 8px 12px; }
+
+/* 操作列 */
+.table-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+}
+.table-action-btn {
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center; justify-content: center;
+    background: none; border: none;
+    color: var(--text-secondary); cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+}
+.glass-table tbody tr:hover .table-action-btn { opacity: 1; }
+.table-action-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+    transform: scale(1.1);
+}
+.table-action-btn.danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+}
+
+/* 排序指示器 */
+.sortable { cursor: pointer; user-select: none; }
+.sortable:hover { color: var(--primary); }
+.sortable::after {
+    content: '';
+    display: inline-block;
+    width: 0; height: 0;
+    margin-left: 6px;
+    vertical-align: middle;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid currentColor;
+    opacity: 0.3;
+}
+.sortable.asc::after { border-top: none; border-bottom: 4px solid currentColor; opacity: 1; }
+.sortable.desc::after { opacity: 1; }
+
+/* 空状态 */
+.table-empty { padding: var(--space-2xl); text-align: center; color: var(--text-muted); }
+
+/* 响应式 */
+@media (max-width: 768px) {
+    .table-responsive { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .glass-table { min-width: 600px; }
+}
